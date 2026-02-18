@@ -112,13 +112,12 @@ export default function WaitlistForm() {
       additional_notes: form.additional_notes.trim() || null,
     };
 
-    const { data, error: supabaseError } = await supabase
+    const { error: supabaseError } = await supabase
       .from("waitlist_submissions")
-      .insert([payload])
-      .select();
+      .insert([payload]);
 
     if (process.env.NODE_ENV === "development") {
-      console.log("[BSCU Waitlist] Supabase response:", { data, error: supabaseError });
+      console.log("[BSCU Waitlist] Supabase response:", { error: supabaseError });
     }
 
     setSubmitting(false);
