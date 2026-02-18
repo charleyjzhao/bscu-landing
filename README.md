@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Berkeley Student Credit Union — Landing Page
+
+A digital-first marketing website for the Berkeley Student Credit Union (BSCU), organized by the Haas Fintech Club at UC Berkeley. Built with Next.js 14, TypeScript, Tailwind CSS, and Supabase.
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router) + TypeScript
+- **Styling**: Tailwind CSS
+- **Database**: Supabase (Postgres) via `@supabase/supabase-js`
+- **Fonts**: Inter + Sora (Google Fonts via `next/font/google`)
+- **Deployment**: Vercel
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Set up Supabase
+
+Follow the steps below to configure your Supabase project.
+
+### 3. Configure environment variables
+
+```bash
+cp .env.local.example .env.local
+```
+
+Edit `.env.local` with your Supabase credentials:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+```
+
+### 4. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Supabase Setup
 
-## Learn More
+### Step 1: Create a Supabase project
 
-To learn more about Next.js, take a look at the following resources:
+Go to [supabase.com](https://supabase.com) and create a new project.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Step 2: Create the waitlist table
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+In the Supabase SQL Editor, run:
 
-## Deploy on Vercel
+```sql
+CREATE TABLE waitlist_submissions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  full_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  affiliation TEXT NOT NULL,
+  graduation_year TEXT,
+  how_heard TEXT NOT NULL,
+  interests TEXT[] NOT NULL,
+  additional_notes TEXT
+);
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Step 3: Get your API credentials
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Go to **Project Settings → API** and copy:
+- **Project URL** → `NEXT_PUBLIC_SUPABASE_URL`
+- **anon / public key** → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+Paste these into your `.env.local` file.
+
+### Step 4: Configure Row Level Security (RLS)
+
+In the Supabase Dashboard, go to **Authentication → Policies** (or **Table Editor → waitlist_submissions → RLS**).
+
+Enable RLS on the table, then add the following policy to allow anonymous form submissions:
+
+```sql
+-- Allow public INSERT (waitlist form submissions)
+CREATE POLICY "Allow anon insert"
+ON waitlist_submissions
+FOR INSERT
+TO anon
+WITH CHECK (true);
+```
+
+This permits unauthenticated users (the public) to insert rows, while blocking any reads or updates from the frontend.
+
+### Step 5: (Optional) Verify submissions
+
+To view submissions, go to **Table Editor → waitlist_submissions** in the Supabase Dashboard.
+
+---
+
+## Project Structure
+
+```
+bscu-landing/
+├── app/
+│   ├── globals.css          # Global styles, animations, custom CSS
+│   ├── layout.tsx           # Root layout with fonts and metadata
+│   └── page.tsx             # Main page — assembles all sections
+├── components/
+│   ├── AnimateOnScroll.tsx  # IntersectionObserver fade-up wrapper
+│   ├── Navbar.tsx           # Fixed nav with scroll effect + mobile menu
+│   ├── Hero.tsx             # Hero section with glow, headline, stats
+│   ├── About.tsx            # About section (two-column)
+│   ├── WhyBSCU.tsx          # Why BSCU (gradient band + 3 cards)
+│   ├── WhoWereLookingFor.tsx # Four personas section
+│   ├── WaitlistForm.tsx     # Waitlist form with Supabase INSERT
+│   └── Footer.tsx           # Footer with disclaimer
+├── lib/
+│   └── supabase.ts          # Supabase client singleton
+├── .env.local.example       # Template for environment variables
+└── README.md
+```
+
+---
+
+## Deployment (Vercel)
+
+1. Push the repository to GitHub.
+2. Import the repo at [vercel.com](https://vercel.com).
+3. Add environment variables in **Project Settings → Environment Variables**:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+4. Deploy. No additional Vercel configuration needed.
+
+---
+
+## Development Notes
+
+- Supabase responses are logged to the console in `development` mode.
+- The form replaces itself with a confirmation message on successful submission.
+- The graduation year field is conditionally shown only for student affiliations.
+- All sections use `IntersectionObserver`-based fade-up animations (no Framer Motion dependency).
+- The navigation bar transitions from transparent to a blurred dark background on scroll.
+- Mobile menu slides in from the right with a backdrop overlay.
