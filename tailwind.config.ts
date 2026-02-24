@@ -18,8 +18,8 @@ const config: Config = {
         "text-secondary": "#94A3B8",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Sora", "Inter", "system-ui", "sans-serif"],
+        sans: ["var(--font-jakarta)", "system-ui", "sans-serif"],
+        display: ["var(--font-jakarta)", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         eyebrow: "0.15em",

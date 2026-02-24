@@ -14,8 +14,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <p className="text-[13px] text-[#475569] text-center">
-            &copy; 2025 Berkeley Student Credit Union. Organized by the Haas
-            Fintech Club.
+            &copy; 2025 Berkeley Student Credit Union (Proposed)
           </p>
 
           {/* Right spacer (intentionally empty) */}

@@ -10,7 +10,7 @@ const stats = [
     label: "years of proven student credit union models (Georgetown, UPenn)",
   },
   {
-    number: "1",
+    number: "1st",
     label: "digital-first credit union being built for UC Berkeley",
   },
 ];
@@ -59,24 +59,24 @@ export default function Hero() {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-[17px] sm:text-[18px] leading-relaxed text-[#94A3B8] max-w-2xl mx-auto mb-10">
-          The Berkeley Student Credit Union is a digital-first, student-governed
-          credit union designed for UC Berkeley students, by UC Berkeley
-          students. No branches. No compromises. Built for how you actually
-          live, study, and build.
+        <p className="text-[17px] sm:text-[18px] leading-relaxed text-[#94A3B8] max-w-[732px] mx-auto mb-10">
+          The Berkeley Student Credit Union (Proposed) aims to create a
+          digital-first, student-governed credit union designed for UC Berkeley
+          students, by UC Berkeley students. No branches. No compromises. Built
+          for how you actually live, study, and build.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 sm:mb-20">
           <button
             onClick={() => scrollTo("#waitlist")}
-            className="bg-[#C9A84C] text-[#0A0F1E] font-semibold px-8 py-3.5 rounded-md text-[15px] hover:bg-[#E2B96F] transition-all duration-200 shadow-[0_0_24px_rgba(201,168,76,0.25)] hover:shadow-[0_0_32px_rgba(201,168,76,0.35)]"
+            className="w-44 bg-[#C9A84C] text-[#0A0F1E] font-semibold py-3.5 rounded-md text-[15px] hover:bg-[#E2B96F] transition-all duration-200 shadow-[0_0_24px_rgba(201,168,76,0.25)] hover:shadow-[0_0_32px_rgba(201,168,76,0.35)]"
           >
             Join the Waitlist
           </button>
           <button
             onClick={() => scrollTo("#about")}
-            className="border border-[#C9A84C] text-[#C9A84C] font-semibold px-8 py-3.5 rounded-md text-[15px] hover:bg-[#C9A84C0D] transition-all duration-200"
+            className="w-44 border border-[#C9A84C] text-[#C9A84C] font-semibold py-3.5 rounded-md text-[15px] hover:bg-[#C9A84C0D] transition-all duration-200"
           >
             Learn More
           </button>
@@ -103,11 +103,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-        <span className="text-[11px] tracking-widest text-[#94A3B8] uppercase">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-[#94A3B8] to-transparent" />
-      </div>
     </section>
   );
 }

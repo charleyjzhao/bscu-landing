@@ -28,7 +28,7 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-[16px] leading-relaxed text-[#94A3B8]">
                 <p>
-                  The Berkeley Student Credit Union is organized by the Haas
+                  The Berkeley Student Credit Union (Proposed) is organized by the Haas
                   Fintech Club — a 700+ member MBA organization — and led by
                   students with professional backgrounds in finance, technology,
                   and operations. Unlike traditional campus banks, BSCU is

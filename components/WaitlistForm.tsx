@@ -138,6 +138,7 @@ export default function WaitlistForm() {
     <section
       id="waitlist"
       className="py-20 sm:py-28 px-5 sm:px-8 border-t border-[#1E2D45]"
+      style={{ background: "linear-gradient(160deg, #0D2137 0%, #0A1628 50%, #0D2137 100%)" }}
     >
       <div className="max-w-2xl mx-auto">
         <AnimateOnScroll>
@@ -160,7 +161,7 @@ export default function WaitlistForm() {
 
         {success ? (
           <AnimateOnScroll>
-            <div className="bg-[#111827] border border-[#1E2D45] rounded-xl p-10 text-center">
+            <div className="bg-[#0A0F1E] border border-[#1E2D45] rounded-xl p-10 text-center">
               {/* Check icon */}
               <div className="w-14 h-14 rounded-full bg-[#C9A84C1A] border border-[#C9A84C33] flex items-center justify-center mx-auto mb-5">
                 <svg
@@ -196,7 +197,7 @@ export default function WaitlistForm() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="bg-[#111827] border border-[#1E2D45] rounded-xl p-7 sm:p-9 flex flex-col gap-6"
+              className="bg-[#0A0F1E] border border-[#1E2D45] rounded-xl p-7 sm:p-9 flex flex-col gap-6"
             >
               {/* Full Name */}
               <div className="flex flex-col gap-2">
@@ -335,7 +336,7 @@ export default function WaitlistForm() {
                         className={`checkbox-item px-4 py-3 rounded-lg border cursor-pointer transition-all duration-200 ${
                           checked
                             ? "border-[#C9A84C66] bg-[#C9A84C0D]"
-                            : "border-[#1E2D45] bg-[#0A0F1E] hover:border-[#C9A84C44]"
+                            : "border-[#1E2D45] bg-[#111827] hover:border-[#C9A84C44]"
                         }`}
                       >
                         <input

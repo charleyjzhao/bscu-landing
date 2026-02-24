@@ -125,13 +125,13 @@ export default function WhoWereLookingFor() {
             onClick={scrollToWaitlist}
             className="text-[#C9A84C] font-medium text-[15px] hover:text-[#E2B96F] transition-colors duration-200 flex items-center gap-2 mx-auto group"
           >
+            Express your interest via the waitlist below
             <span
-              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              className="inline-block transition-transform duration-200 group-hover:translate-y-1"
               aria-hidden="true"
             >
-              →
+              ↓
             </span>
-            Express your interest via the waitlist below
           </button>
         </AnimateOnScroll>
       </div>
